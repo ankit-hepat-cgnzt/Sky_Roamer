@@ -1,0 +1,103 @@
+create database USERDATA;
+
+use USERDATA;
+ 
+create table user_data (
+FirstName varchar(50) not null,
+LastName varchar(50) not null,
+DOB date not null,
+Gender varchar(10) not null,
+ContactNumber varchar(15) not null,
+Email varchar(50) not null,
+Username varchar(20) not null,
+Pass_word varchar(15) not null,
+Usercategory varchar(15) not null,
+primary key (Username)) 
+
+ SELECT * FROM user_data;
+
+/* user story-1 database craeted successfully*/
+
+select Username, Pass_word from user_data;
+
+/* userstory-2 data validation statement*/
+
+create table login_info(user_name varchar(25),password varchar(25));
+
+insert into login_info(user_name,password) values("admin","admin");
+
+/*insert into login_info(user_name,password) values("user","user");*/
+
+/* userstory-3 table created successfully*/
+
+create table issues (
+RequestID varchar(10) not null,
+Issue varchar(30) not null,
+Descriptionn varchar(200) not null,
+Date_of_Ticket date not null,
+primary key (RequestID));
+
+/* Userstory-4 Table created */
+
+select * from issues where RequestID='';/* request id selected by admin */
+
+/* Userstory-5 Completed */
+
+create table RST_PSW (
+Username varchar(20) not null,
+Security_Question varchar(50) not null,
+Answer varchar(20) not null,
+foreign key (Username) references user_data);
+
+ update user_data
+ set pass_word = ''/* resetted password to be entered by user */
+ where username='' /* user specific */;
+ 
+ create table AddTourPackage_Agent (
+ Package_Id varchar(10) not null,
+ Source varchar(50) not null,
+ Destination varchar(50) not null,
+ Per_Head_Cost varchar(10) not null,
+ Images Blob);
+ 
+ update AddTourPackage_Agent
+ set Source = '' where Package_Id ='';
+ 
+update AddTourPackage_Agent
+ set Destination = '' where Package_Id ='';
+ 
+  update AddTourPackage_Agent
+ set Per_Head_Cost = '' where Package_Id ='';
+ 
+   update AddTourPackage_Agent
+ set Image = '' where Package_Id ='';
+ 
+ create table BookPackage_Customer(
+ Package_Id varchar(50) not null,
+ Source varchar(50) not null,
+ Destination varchar(50) not null,
+ No_of_Person varchar(50) not null,
+ Date_ Date not null,
+ foreign key(Package_Id) references AddTourPackage_Agent);
+ 
+ /* Customer should be able to update booking details */
+ 
+ update BookPackage_Customer
+ set Source='' where Package_Id='';
+ 
+  update BookPackage_Customer
+ set Destination='' where Package_Id='';
+ 
+  update BookPackage_Customer
+ set No_of_Person='' where Package_Id='';
+ 
+  update BookPackage_Customer
+ set Date_='' where Package_Id='';
+ 
+ /* Customer should be able to delete the details */
+ 
+ delete Source,Destination, No_of_Person, Date_ from BookPackage_Customer where Package_Id = '';
+ 
+ /* to view booking (customer) */
+ select * from BookPackage_Customer;
+
